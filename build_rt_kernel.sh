@@ -20,7 +20,11 @@ WORK_DIR=`pwd`/rtkernel
 rm -rf $WORK_DIR
 mkdir $WORK_DIR
 cd $WORK_DIR
- 
+
+mkdir -p Kernel/rtkernel
+cd Kernel/rtkernel
+
+
 # download the kernel
 git clone --depth=1 --branch $KERNEL_BRANCH https://github.com/raspberrypi/linux.git
  
@@ -63,7 +67,8 @@ cd ../../
  
 # copy assets to the $PROJECT_DIR/result directory
 RESULT_DIR=$WORK_DIR/result
-mkdir -p $RESULT_DIR/boot/overlays
+mkdir -p ${RESULT_DIR}/boot/overlays
+mkdir -p ${RESULT_DIR}/lib/
 cp ${WORK_DIR}/linux/arch/$ARCH/boot/Image.gz ${RESULT_DIR}/boot/$KERNEL_NAME.img
 cp -r ${WORK_DIR}/linux/modules_to_install/lib/* ${RESULT_DIR}/lib/
 cp ${WORK_DIR}/linux/arch/$ARCH/boot/dts/broadcom/*.dtb ${RESULT_DIR}/boot/
